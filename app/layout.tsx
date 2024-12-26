@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Providers from "./Provider";
+import Navbar from "@/components/navbar/Navbar";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+import { Spotlight } from "@/components/ui/spotlight";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -26,9 +31,29 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen h-full`}
       >
-        {children}
+        <Providers>
+          {/* Navbar */}
+          <Navbar className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-br from-black via-zinc-900 to-black" />
+          <div className="bg-gradient-to-br from-black via-zinc-900 to-black text-white p-8 relative">
+            {/* Spotlight */}
+            <Spotlight
+              className="-top-40 left-0 md:left-60 md:-top-20 "
+              fill="#9333ea"
+              />
+            {/* BackgroundBeamsWithCollision */}
+            <BackgroundBeamsWithCollision>
+              {/* Background Grid */}
+
+              {/* bg-gradient-to-r from-purple-400 via-fuchsia-300 to-violet-400 */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_2px,transparent_2px),linear-gradient(to_bottom,#4f4f4f2e_2px,transparent_2px)] bg-[size:50px_50px] [mask-image:linear-gradient(white,transparent)] " />
+              <div className="absolute inset-0" />
+            </BackgroundBeamsWithCollision>
+            {/* Children (Content) */}
+            <div className="relative z-10">{children}</div>
+          </div>
+        </Providers>
       </body>
     </html>
   );
