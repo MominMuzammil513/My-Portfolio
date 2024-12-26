@@ -38,7 +38,6 @@ const Navbar = ({
       }
     }
   });
-  console.log(scrollYProgress.get(), scrollYProgress.getPrevious(),"------",visible,"TTTTT");
 
   return (
     <AnimatePresence mode="wait">
